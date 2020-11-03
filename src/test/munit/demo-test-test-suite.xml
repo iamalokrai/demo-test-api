@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:munit="http://www.mulesoft.org/schema/mule/munit"
+	xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<munit:config name="demo-test-test-suite.xml" />
+	<http:request-config name="HTTP_Request_configuration" doc:name="HTTP Request configuration" doc:id="ebb26fc7-29be-4e41-92fd-bc8e0779b2f9" >
+		<http:request-connection host="localhost" port="8081" />
+	</http:request-config>
+	<munit:test name="demo-test-test-suiteTest" doc:id="42b3883f-c16f-46c5-9b4c-70166557886c" >
+		<munit:enable-flow-sources >
+			<munit:enable-flow-source value="demo-test-main" />
+			<munit:enable-flow-source value="get:\method1:demo-test-config" />
+		</munit:enable-flow-sources>
+		<munit:execution >
+			<http:request method="GET" doc:name="Request" doc:id="946c2a46-767e-4dfa-8b0f-dba06bd9ebc0" config-ref="HTTP_Request_configuration" path="/api/method1"/>
+		</munit:execution>
+	</munit:test>
+	<munit:test name="demo-test-test-suiteTest1" doc:id="f20cc8f0-0871-4a1b-9029-9c2fb4a1a65d" >
+		<munit:enable-flow-sources >
+			<munit:enable-flow-source value="demo-test-main" />
+			<munit:enable-flow-source value="get:\method2:demo-test-config" />
+		</munit:enable-flow-sources>
+		<munit:execution >
+			<http:request method="GET" doc:name="Request" doc:id="8917f28f-9c72-485e-b3c0-a43a55a1262a" config-ref="HTTP_Request_configuration" path="/api/method2"/>
+		</munit:execution>
+	</munit:test>
+
+
+</mule>
